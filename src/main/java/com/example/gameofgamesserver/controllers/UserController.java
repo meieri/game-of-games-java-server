@@ -27,6 +27,11 @@ public class UserController {
     @PostMapping("/api/login")
     public User login(@RequestBody User user, HttpSession session) {
         User currUser = service.findUserByCredentials(user.getUsername(), user.getPassword());
+        if (currUser == null) {
+            User badLogin = new User();
+            badLogin.setUsername("BADLOGIN");
+            return badLogin;
+        }
         session.setAttribute("currentUser", currUser);
         return currUser;
     }
