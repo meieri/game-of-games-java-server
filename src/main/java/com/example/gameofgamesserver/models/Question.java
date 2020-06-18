@@ -5,6 +5,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "questions")
 public class Question {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
+
+    @ManyToOne
+    Category category;
+
+    Integer value;
+    String question;
+    String answer;
+
     public Integer getId() {
         return id;
     }
@@ -44,15 +55,4 @@ public class Question {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-
-    @ManyToOne
-    Category category;
-
-    Integer value;
-    String question;
-    String answer;
 }

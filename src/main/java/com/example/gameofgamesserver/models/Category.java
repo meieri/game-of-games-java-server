@@ -27,6 +27,10 @@ public class Category {
         this.questions = questions;
     }
 
+    public void addQuestion(Question question) {
+        this.questions.add(question);
+    }
+
     public Integer getId() {
         return id;
     }

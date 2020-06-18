@@ -18,26 +18,6 @@ public class DemoApplication {
 
 	public static void main(String[] args) throws JsonProcessingException {
 		SpringApplication.run(DemoApplication.class, args);
-
-		// User user = new User();
-		// Game game = new Game();
-		// Category cat = new Category();
-
-		// List<Question> qs = new ArrayList<Question>();
-		// Question q = new Question();
-		// qs.add(q);
-		// Question q1 = new Question();
-		// qs.add(q1);
-		// Question q3 = new Question();
-		// qs.add(q3);
-		// cat.setQuestions(qs);
-		// List<Category> cats = new ArrayList<Category>();
-		// cats.add(cat);
-		// game.setCategories(cats);
-
-		// ObjectMapper objectMapper = new ObjectMapper();
-		// final String json = objectMapper.writeValueAsString(game);
-		// System.out.println(json);
 	}
 
 }

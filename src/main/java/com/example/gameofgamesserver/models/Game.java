@@ -40,6 +40,10 @@ public class Game {
         categories = categories;
     }
 
+    public void addCategory(Category category) {
+        this.categories.add(category);
+    }
+
     public Integer getId() {
         return id;
     }
