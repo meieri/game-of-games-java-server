@@ -5,6 +5,7 @@ import com.example.gameofgamesserver.models.Game;
 import com.example.gameofgamesserver.models.Question;
 import com.example.gameofgamesserver.models.User;
 import com.example.gameofgamesserver.repositories.GameRepository;
+import com.example.gameofgamesserver.repositories.QuestionRepository;
 import com.example.gameofgamesserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ import java.util.Map;
 public class GameService {
     @Autowired
     GameRepository repository;
+    @Autowired
+    CategoryService categoryService;
+    @Autowired
+    QuestionService questionService;
 
     // Slightly hacky JSON parsing, because I really didn't want to write a deserializer
     public Game createGame(Map<String, Object> gameCategories, User currentUser) {
@@ -25,12 +30,15 @@ public class GameService {
         Game newGame = new Game();
         newGame.setStart(new Date());
         newGame.setUser(currentUser);
+        newGame = repository.save(newGame);
+
         List<Category> newCategories = new ArrayList<Category>();
         List<Question> newQuestions = new ArrayList<Question>();
 
         for (Map.Entry<String, Object> entry : gameCategories.entrySet()) {
             Category newCategory = new Category();
             newCategory.setName(entry.getKey());
+            categoryService.createCategory(newCategory, newGame);
 
             ArrayList<Object> questions = (ArrayList<Object>) entry.getValue();
             for (Object q: questions) {
@@ -52,6 +60,7 @@ public class GameService {
                     }
                 }
                 if (newQuestion != null) {
+                    questionService.createQuestion(newQuestion, newCategory);
                     newQuestions.add(newQuestion);
                 }
             }
@@ -59,9 +68,7 @@ public class GameService {
                 newCategories.add(newCategory);
             }
         }
-        System.out.println(newCategories);
-        System.out.println(newGame);
         newGame.setCategories(newCategories);
-        return repository.save(newGame);
+        return newGame;
     }
 }
