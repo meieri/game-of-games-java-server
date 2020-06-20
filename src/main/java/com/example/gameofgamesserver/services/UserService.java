@@ -22,5 +22,4 @@ public class UserService {
         return repository.findUserByCredentials(username, password);
     }
 
-
 }

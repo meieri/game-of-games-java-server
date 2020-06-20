@@ -1,5 +1,7 @@
 package com.example.gameofgamesserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class Question {
     Integer id;
 
     @ManyToOne
+    @JsonIgnore
     Category category;
 
     Integer value;

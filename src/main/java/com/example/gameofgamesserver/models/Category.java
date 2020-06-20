@@ -1,10 +1,12 @@
 package com.example.gameofgamesserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 public class Category {
 
     @OneToMany(mappedBy = "category")
@@ -15,6 +17,7 @@ public class Category {
     Integer id;
 
     @ManyToOne
+    @JsonIgnore
     Game game;
 
     String name;

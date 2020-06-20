@@ -71,4 +71,15 @@ public class GameService {
         newGame.setCategories(newCategories);
         return newGame;
     }
+
+    public Game findGameById(Integer id) {
+        Game game = repository.findById(id).get();
+        List<Category> categories = categoryService.findCategoriesForGame(id);
+        for (Category currCat : categories) {
+            List<Question> questions = questionService.getQuestionsForCategory(currCat.getId());
+            currCat.setQuestions(questions);
+        }
+        game.setCategories(categories);
+        return game;
+    }
 }

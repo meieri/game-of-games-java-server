@@ -1,5 +1,6 @@
 package com.example.gameofgamesserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ManyToAny;
 
 import javax.annotation.Generated;
@@ -18,6 +19,7 @@ public class Game {
     List<Category> categories;
 
     @ManyToOne
+    @JsonIgnore
     User user;
 
     Date start;

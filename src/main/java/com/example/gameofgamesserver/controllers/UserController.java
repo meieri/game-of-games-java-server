@@ -17,6 +17,22 @@ public class UserController {
     @Autowired
     UserService service;
 
+    @PostMapping("api/user/name")
+    public User updateUsername(@RequestBody String username, HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        currentUser.setUsername(username);
+        // might actually create new user & not just update
+        return service.createUser(currentUser);
+    }
+
+    @PostMapping("api/user/pass")
+    public User updatePassword(@RequestBody String password, HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        currentUser.setPassword(password);
+        // might actually create new user & not just update
+        return service.createUser(currentUser);
+    }
+
     @PostMapping("/api/register")
     public User register(@RequestBody User user, HttpSession session) {
         User currentUser = service.createUser(user);
