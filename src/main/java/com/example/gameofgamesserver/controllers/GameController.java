@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,8 +24,14 @@ public class GameController {
         return service.createGame(gameCategories, currentUser);
     }
 
-    @PostMapping("api/game/{gameId}")
+    @GetMapping("api/game/{gameId}")
     public Game findGameById(@PathVariable("gameId") Integer gameId) {
         return service.findGameById(gameId);
+    }
+
+    @PostMapping("api/user/games")
+    public List<Game> findGameByUser(HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        return service.findGameByUserId(currentUser.getId());
     }
 }

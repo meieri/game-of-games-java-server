@@ -25,6 +25,7 @@ public class GameService {
     QuestionService questionService;
 
     // Slightly hacky JSON parsing, because I really didn't want to write a deserializer
+    // TODO refactor into respective services
     public Game createGame(Map<String, Object> gameCategories, User currentUser) {
 
         Game newGame = new Game();
@@ -81,5 +82,11 @@ public class GameService {
         }
         game.setCategories(categories);
         return game;
+    }
+
+    public List<Game> findGameByUserId(Integer uid) {
+        // shallow game
+        return repository.findGameByUserId(uid);
+
     }
 }
