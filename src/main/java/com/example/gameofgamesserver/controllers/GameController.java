@@ -34,4 +34,9 @@ public class GameController {
         User currentUser = (User) session.getAttribute("currentUser");
         return service.findGameByUserId(currentUser.getId());
     }
+
+    @PostMapping("api/gameover/{gameId}")
+    public Game endGame(@PathVariable("gameId") Integer gameId) {
+        return service.endGame(gameId);
+    }
 }

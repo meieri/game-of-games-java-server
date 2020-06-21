@@ -10,6 +10,8 @@ import com.example.gameofgamesserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -86,7 +88,18 @@ public class GameService {
 
     public List<Game> findGameByUserId(Integer uid) {
         // shallow game
-        return repository.findGameByUserId(uid);
+        List<Game> games = repository.findGameByUserId(uid);
+        for (Game game : games) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+            String strDate = dateFormat.format(game.getStart());
+            game.setName(strDate);
+        }
+        return games;
+    }
 
+    public Game endGame(Integer gameId) {
+        Game game = repository.findById(gameId).get();
+        game.setEnd(new Date());
+        return game;
     }
 }
