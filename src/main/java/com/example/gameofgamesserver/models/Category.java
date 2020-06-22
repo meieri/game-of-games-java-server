@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "categories")
 public class Category {
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", orphanRemoval = true)
     List<Question> questions;
 
     @Id

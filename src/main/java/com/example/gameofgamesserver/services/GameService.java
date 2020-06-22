@@ -102,4 +102,8 @@ public class GameService {
         game.setEnd(new Date());
         return game;
     }
+
+    public void deleteGame(Integer gameId) {
+        repository.deleteById(gameId);
+    }
 }

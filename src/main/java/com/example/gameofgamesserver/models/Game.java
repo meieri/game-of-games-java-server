@@ -15,7 +15,7 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @OneToMany(mappedBy = "game")
+    @OneToMany(mappedBy = "game", orphanRemoval = true)
     List<Category> categories;
 
     @ManyToOne

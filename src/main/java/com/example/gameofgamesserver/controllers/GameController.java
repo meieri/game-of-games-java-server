@@ -39,4 +39,10 @@ public class GameController {
     public Game endGame(@PathVariable("gameId") Integer gameId) {
         return service.endGame(gameId);
     }
+
+    @DeleteMapping("api/game/{gameId}")
+    public void deleteGame(@PathVariable("gameId") Integer gameId) {
+        service.deleteGame(gameId);
+    }
+
 }
